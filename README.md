@@ -32,7 +32,7 @@ df.types
 ```python
 target = df['column']
 
-features = 
+features = df.drop(columns = ['column'])
 ```
 
 6- Dividir los datos en Training data y Test data (función train_test_split)
@@ -245,23 +245,37 @@ Su **ventaja** es que **reduce la complejidad** del modelo.
 
 # Feature Scaling
 
-Consiste en ttransformar las características numéricas para que estén en escalas similares. Se puede usar normalización o min-max scaler
+Consiste en transformar las características numéricas para que estén en escalas similares. Se puede usar normalización o min-max scaler
 
 ### MinMaxScaler 
 
-Es una **normalización** que escala las características en un **rabgo de 0 a 1**, manteniendo la relación entre los datos.
+Trabajamos con el rango mínimo-máximo y lo transformamos en un rango 0 a 1.
+
+Es una **normalización** que escala las características en un **rango de 0 a 1**, manteniendo la relación entre los datos.
 
 Este método **mejora la performance** de los modelos.
 
 
 ### Z-Score (Standard scaling)
 
-Consiste en llevar la media a 0 y el desvío starndard a 1.
+Consiste en llevar la media a 0 y el desvío standard a 1.
+
+Se usa cuando tenemos característiocas que tienen un comportamiento normal.
+
+Es una **estandarización**.
 
 
-# PCA 
+### Robust Scaling
 
-Se trata de reducir la dimensionalidad de un dataset, y quedarse con las variables que explican la relación entre las variables.
+Es similar el Standard scaling (Z-Score), pero en vez de utilizar el desvío estandar, utilizamos el rango intercuartílico (IQR), y en vez de utilizar la media, utilizamos la mediana.
+
+Esto perfomará mejor cuando los datos **NO** provengan de una distribución normal.
+
+
+
+# PCA (Análisis de componentes principales)
+
+Se trata de reducir la dimensionalidad de un dataset, y quedarse con las variables que explican la correlación entre las variables.
 
 -------------------------------------------------------------------------------------------------
 
@@ -278,6 +292,22 @@ Se usa para mejorar el rendimiento, y consiste en analizar la relación y elimin
 Cuando tengamos **variables categóricas** usaremos chi2
 
 Para **variables numéricas** usaremos la matriz de correlación (mapa de calor).
+
+
+Existen varios métodos para la feature selection:
+
+-Métodos basados en filtros: 
+
+    -Pruebas de chi2
+
+    -Correlación de Pearson
+
+-Uso de Wrappers
+
+-Uso de embeddings
+
+(Forward selection, backward elimination, recursive, features elimination, ...)
+
 
 
 
