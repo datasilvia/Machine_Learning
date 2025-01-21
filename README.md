@@ -186,7 +186,51 @@ plt.show()
 
 ```
 
+## Evaluación de un modelo de Regresión (código)
 
+``` python
+
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Hacer predicciones con el modelo
+y_pred = knn.predict(X_test)
+
+# 1. Calcular métricas de evaluación
+mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+rmse = np.sqrt(mse)  # Raíz cuadrada del MSE
+r2 = r2_score(y_test, y_pred)
+
+print("Métricas de Evaluación:")
+print(f"MAE  (Mean Absolute Error): {mae:.2f}")
+print(f"MSE  (Mean Squared Error): {mse:.2f}")
+print(f"RMSE (Root Mean Squared Error): {rmse:.2f}")
+print(f"R^2  (Coeficiente de determinación): {r2:.2f}")
+
+# 2. Visualizar resultados: Gráfico de dispersión
+plt.figure(figsize=(6, 6))
+plt.scatter(y_test, y_pred, alpha=0.7)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color='red', linestyle='--', label="Línea ideal")
+plt.title("Comparación entre valores reales y predichos")
+plt.xlabel("Valores Reales (y_test)")
+plt.ylabel("Valores Predichos (y_pred)")
+plt.legend()
+plt.grid()
+plt.show()
+
+# 3. Histograma del error
+errors = y_test - y_pred
+plt.figure(figsize=(6, 4))
+plt.hist(errors, bins=30, alpha=0.7, color="blue", edgecolor="black")
+plt.title("Distribución del Error")
+plt.xlabel("Error (y_test - y_pred)")
+plt.ylabel("Frecuencia")
+plt.grid()
+plt.show()
+
+```
 
 
 
